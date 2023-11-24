@@ -1,0 +1,138 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 50px;
+  min-width: 500px;
+
+  .currency-select {
+    place-self: flex-end;
+  }
+
+  .table-container {
+    display: flex;
+    justify-content: center;
+    background-color: #131313;
+    padding: 10px;
+    border-radius: 10px;
+
+    .table {
+      border-radius: 10px;
+      border-collapse: collapse;
+      border-style: hidden;
+      width: 100%;
+
+      .table-header-row {
+
+
+        .table-header {
+
+          padding: 5px;
+          border: 2px solid #1e1e1e;
+        }
+      }
+
+      .table-data-row {
+        vertical-align: middle;
+
+        .table-data {
+          text-align: center;
+          padding: 5px 10px;
+          border: 2px solid #1e1e1e;
+          border-radius: 5px;
+
+        }
+      }
+    }
+  }
+
+  button {
+    margin-top: 10px;
+    padding: 10px;
+    place-self: flex-end;
+    background-color: #007cad;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 1px 1px 5px #000000;
+  }
+
+  button:hover {
+    background-color: #00719b;
+  }
+
+  button:active {
+    box-shadow: inset 1px 1px 5px #000000;
+    text-shadow: 1px 1px 5px #000000;
+  }
+}
+
+#expenseModal {
+
+  display: none;
+
+  .modal-input-container {
+
+    display: flex;
+    flex-direction: column;
+
+    .input-field {
+      background-color: #1a1a1a;
+      border: #090909 2px solid;
+      border-radius: 4px;
+      padding: 5px 20px;
+      margin: 10px;
+    }
+
+    .input-label {
+      margin: 10px;
+    }
+
+    .modal-label {
+      margin: 0 10px;
+    }
+
+    .input-field[type=number] {
+      -moz-appearance: textfield;
+    }
+
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+
+  }
+
+  .modal-button-container {
+    place-self: flex-end;
+
+    .modal-button {
+      margin: 10px 10px;
+      padding: 10px;
+      place-self: flex-end;
+      border-radius: 10px;
+      border: none;
+      box-shadow: 1px 1px 5px #000000;
+    }
+
+    .cancel {
+      background-color: #a20000;
+    }
+
+    .submit {
+      background-color: #007cad;
+    }
+
+    .cancel:hover {
+      background-color: #8d0000;
+    }
+
+    .submit:hover {
+      background-color: #00719b;
+    }
+
+    .modal-button:active {
+      box-shadow: inset 1px 1px 5px #000000;
+      text-shadow: 1px 1px 5px #000000;
+    }
+  }
+}

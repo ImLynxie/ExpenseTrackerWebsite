@@ -1,14 +1,18 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
+import {HeaderComponent} from "./shared/header/header.component";
+import {ExpenseTableComponent} from "./shared/expense-table/expense-table.component";
+import {CurrencyType} from "./expense";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, ExpenseTableComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'ExpenseTrackerWebsite';
+  title = 'Expense Tracker';
+    protected readonly CurrencyType = CurrencyType;
 }

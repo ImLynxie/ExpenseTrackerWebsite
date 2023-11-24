@@ -1,0 +1,26 @@
+.modal {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+  max-width: 100%;
+  inset: 0;
+
+  z-index: 10000;
+
+  background-color: rgba(0, 0, 0, .75);
+  padding: 300px 600px;
+
+  overflow: auto;
+
+  .modal-body {
+    padding: 20px;
+    background: #131313;
+    border-radius: 10px;
+  }
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+

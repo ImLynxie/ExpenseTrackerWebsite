@@ -1,0 +1,48 @@
+<div class="container">
+  <select class="currency-select" name="currencyType" id="currencyType" [(ngModel)]="currencyType">
+    <option value="{{CurrencyType.DOLLAR}}">Dollar $</option>
+    <option value="{{CurrencyType.EURO}}">Euro €</option>
+    <option value="{{CurrencyType.RUBLE}}">Ruble ₽</option>
+  </select>
+  <div class="table-container">
+    <table class="table">
+      <tr class="table-header-row">
+        <th class="table-header">Expense</th>
+        <th class="table-header">Payment Method</th>
+        <th class="table-header">Amount</th>
+      </tr>
+      <tr class="table-data-row" *ngFor="let expense of expenses">
+        <td class="table-data">{{expense.name}}</td>
+        <td class="table-data">{{expense.type}}</td>
+        <td class="table-data">{{currencyType}} {{expense.amount}}</td>
+      </tr>
+    </table>
+  </div>
+
+  <button (click)="modalService.open('expenseModal')">
+    Add Expense
+  </button>
+</div>
+
+<app-modal id="expenseModal">
+  <ng-form class="modal-input-container">
+    <label class="modal-label" for="expenseName">Expense Name</label>
+    <input class="input-field" type="text" id="expenseName" name="expenseName" placeholder="Expense Name" [(ngModel)]="expenseName">
+    <br>
+    <label class="modal-label" for="expenseType">Expense Type</label>
+    <select class="input-field" name="expenseType" id="expenseType" [(ngModel)]="expenseType">
+      <option value="{{ExpenseType.DEBIT}}">Debit</option>
+      <option value="{{ExpenseType.CREDIT}}">Credit</option>
+      <option value="{{ExpenseType.CASH}}">Cash</option>
+    </select>
+    <br>
+    <label class="modal-label" for="expenseAmount">Expense Amount</label>
+    <input class="input-field" type="number" id="expenseAmount" name="expenseAmount" placeholder="Expense Amount" [(ngModel)]="expenseAmount">
+
+    <div class="modal-button-container">
+      <button class="modal-button cancel" (click)="modalService.close();">Cancel</button>
+      <button class="modal-button submit" (click)="createNewExpense();">Submit</button>
+    </div>
+  </ng-form>
+</app-modal>
+

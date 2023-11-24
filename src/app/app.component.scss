@@ -1,0 +1,11 @@
+.expense-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 100%;
+
+  .expense-table {
+    place-self: flex-start;
+    width: 100%;
+  }
+}

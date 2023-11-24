@@ -1,1 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import url('https://fonts.googleapis.com/css2?family=Exo&display=swap');
+@import "styles/variables";
+
+body {
+  margin: 0;
+  background-color: #0E0E0E;
+}
+
+th, td, h1, button, option, label, select, input {
+  font-family: $font;
+  color: white;
+}
+
+th, td, option, label {
+  font-size: 13px;
+}
+
+select, option, input {
+  background-color: #1a1a1a;
+  border: #131313 2px solid;
+  border-radius: 4px;
+  padding: 5px 20px;
+  margin: 10px;
+}
+
