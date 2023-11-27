@@ -3,6 +3,7 @@ export interface Expense {
   name: string,
   type?: ExpenseType,
   amount: number;
+  currencyType?: CurrencyType
 }
 
 export enum ExpenseType {
@@ -12,7 +13,7 @@ export enum ExpenseType {
 }
 
 export enum CurrencyType {
-  DOLLAR= ("$"),
-  EURO = ("€"),
-  RUBLE = ("₽"),
+  USD = ("USD"),
+  EUR = ("EUR"),
+  RUB = ("RUB"),
 }

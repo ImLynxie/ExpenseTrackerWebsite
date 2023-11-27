@@ -1,41 +1,57 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
+import {Component, OnInit} from '@angular/core';
+import {CommonModule, CurrencyPipe} from '@angular/common';
 import {ApiService} from "../../_services/api.service";
 import {CurrencyType, Expense, ExpenseType} from "../../expense";
 import {ModalService} from "../../_services/modal.service";
 import {ModalComponent} from "../modal/modal.component";
-import {FormsModule} from "@angular/forms";
-import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators} from "@angular/forms";
+import {SpacePipe} from "../../_pipes/space.pipe";
 
 @Component({
   selector: 'app-expense-table',
   standalone: true,
-  imports: [CommonModule, ModalComponent, FormsModule],
+  imports: [CommonModule, ModalComponent, FormsModule, SpacePipe, ReactiveFormsModule],
   templateUrl: './expense-table.component.html',
   styleUrl: './expense-table.component.scss'
 })
-export class ExpenseTableComponent {
+export class ExpenseTableComponent implements OnInit {
 
   expenses: Expense[] = [];
   protected readonly ExpenseType = ExpenseType;
   protected readonly CurrencyType = CurrencyType;
 
+  expenseForm: FormGroup = this.formBuilder.group({
+    expenseName: ['', Validators.required],
+    expenseAmount: ['', Validators.required],
+    expenseType: ['', Validators.required],
+    selectedCurrency: ['', Validators.required]
+  });
 
-  expenseName: string = '';
-  expenseType: ExpenseType = ExpenseType.DEBIT;
-  expenseAmount: number = 0;
+  constructor(private apiService: ApiService,
+              private formBuilder: FormBuilder,
+              protected modalService: ModalService, private currencyPipe: CurrencyPipe) {
 
-  currencyType: CurrencyType = CurrencyType.DOLLAR;
-
-  constructor(private apiService: ApiService, protected modalService: ModalService) {
     this.getExpenses();
   }
 
+  ngOnInit(): void {
+    this.expenseForm.valueChanges.subscribe(form => {
+      if (form.expenseAmount) {
+        this.expenseForm.patchValue({
+          expenseAmount: this.currencyPipe.transform(
+            this.expenseForm.value.expenseAmount?.replace(/\D/g, '').replace(/^0+/, ''), this.expenseForm.value.selectedCurrency,'symbol-narrow', '1.0-0')
+        })
+      }
+    })
+  }
+
   createNewExpense() {
+
     let expense: Expense = {
-      name: this.expenseName,
-      type: this.expenseType,
-      amount: this.expenseAmount
+      name: this.expenseForm.value.expenseName,
+      type: this.expenseForm.value.expenseType,
+      amount: Number.parseInt(this.expenseForm.value.expenseAmount.replaceAll(',', '').substring(1)),
+      currencyType: this.expenseForm.value.selectedCurrency
     }
 
     this.apiService.saveNewExpense(expense).subscribe();
